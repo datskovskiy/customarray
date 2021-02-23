@@ -63,8 +63,8 @@ namespace CustomArray
         /// <exception cref="ArgumentException">Thrown when count is smaler than 0</exception>
         public CustomArray(int first, IEnumerable<T> list)
         {
-            if (list is null)
-                throw new NullReferenceException("List cant be null.");
+            var e = new NullReferenceException("List cant be null.");
+            if (list is null) throw e;
 
             Array = list.ToArray();
 
@@ -123,7 +123,7 @@ namespace CustomArray
                     throw new ArgumentException($"Index cant be bigger than {Last}.");
 
                 if (value is null)
-                    throw new NullReferenceException("Value cant be null.");
+                    throw new ArgumentNullException(nameof(value), "Value cant be null.");
 
                 Array[item - First] = value;
             }
