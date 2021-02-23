@@ -28,7 +28,7 @@ namespace CustomArray
             get => _length;
             private set
             {
-                if (value < 0)
+                if (value <= 0)
                     throw new ArgumentException("Length cant be smaller than 0.");
 
                 this._length = value;
@@ -48,9 +48,10 @@ namespace CustomArray
         /// <param name="length">Length</param>         
         public CustomArray(int first, int length)
         {
-            Array = new T[length];
             First = first;
             Length = length;
+
+            Array = new T[length];
         }
 
 
@@ -68,7 +69,7 @@ namespace CustomArray
 
             Array = list.ToArray();
 
-            if (Array.Count() < 0)
+            if (!Array.Any())
                 throw new ArgumentException("Count cant be smaller than 0.");
 
             First = first;
@@ -131,12 +132,12 @@ namespace CustomArray
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ((IEnumerable<T>) Array).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 }
